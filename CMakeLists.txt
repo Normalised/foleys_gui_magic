@@ -40,9 +40,11 @@ project (foleys_gui_magic
 
 list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMakeIncludes")
 
-option (FOLEYS_BUILD_EXAMPLES "Build the examples" ON)
-option (FOLEYS_BUILD_TESTS "Build and run the unit tests" ON)
-option (FOLEYS_RUN_PLUGINVAL "Run pluginval on the example plugins" ON)
+if(PROJECT_IS_TOP_LEVEL)
+    option (FOLEYS_BUILD_EXAMPLES "Build the examples" ON)
+    option (FOLEYS_BUILD_TESTS "Build and run the unit tests" ON)
+    option (FOLEYS_RUN_PLUGINVAL "Run pluginval on the example plugins" ON)
+endif()
 
 if(FOLEYS_RUN_PLUGINVAL)
     include (PGMPluginval)
