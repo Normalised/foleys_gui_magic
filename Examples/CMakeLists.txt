@@ -34,6 +34,21 @@
 message (STATUS "Build examples")
 message (STATUS "Run pluginval on examples: ${FOLEYS_RUN_PLUGINVAL}")
 
+# JUCE
+include (FetchContent)
+
+FetchContent_Declare (
+        juce
+        GIT_REPOSITORY https://github.com/juce-framework/JUCE.git
+        GIT_TAG origin/master
+        GIT_SHALLOW ON)
+
+set (JUCE_ENABLE_MODULE_SOURCE_GROUPS ON)
+set (JUCE_BUILD_EXTRAS OFF)
+set (JUCE_BUILD_EXAMPLES OFF)
+
+FetchContent_MakeAvailable (juce)
+
 if(FOLEYS_RUN_PLUGINVAL)
     include (PGMPluginval)
 endif()

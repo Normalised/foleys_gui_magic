@@ -40,11 +40,13 @@ project (foleys_gui_magic
 
 list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMakeIncludes")
 
-include (PGMPluginval)
-
 option (FOLEYS_BUILD_EXAMPLES "Build the examples" ON)
 option (FOLEYS_BUILD_TESTS "Build and run the unit tests" ON)
 option (FOLEYS_RUN_PLUGINVAL "Run pluginval on the example plugins" ON)
+
+if(FOLEYS_RUN_PLUGINVAL)
+    include (PGMPluginval)
+endif()
 
 set_property (GLOBAL PROPERTY USE_FOLDERS ON)
 set_property (GLOBAL PROPERTY DEBUG_CONFIGURATIONS Debug)
@@ -62,21 +64,6 @@ set (CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING
 
 # static linking on Windows
 set (CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-
-# JUCE
-include (FetchContent)
-
-FetchContent_Declare (
-        juce
-        GIT_REPOSITORY https://github.com/juce-framework/JUCE.git
-        GIT_TAG origin/master
-        GIT_SHALLOW ON)
-
-set (JUCE_ENABLE_MODULE_SOURCE_GROUPS ON)
-set (JUCE_BUILD_EXTRAS OFF)
-set (JUCE_BUILD_EXAMPLES OFF)
-
-FetchContent_MakeAvailable (juce)
 
 add_subdirectory (modules)
 
